@@ -177,13 +177,15 @@ def get_results(fund_weight_df, fund_yield_df, bench_weight_df, bench_yield_df):
 if __name__ == '__main__':
     filename1 = 'valuation.xls'
     filename = 'benchmark.xlsx'
-    w.start()
-    data_list = valuation_data_read(filename1)
+    w.start()  #启动api接口
+    data_list = valuation_data_read(filename1) #读到标准数据格式
     temp_list = data_fliter(data_list)
     stocks_df = std_data(temp_list)
+    
     bench_df = benchmark_data_read(filename)
-    fund_weight_df, fund_yield_df= result_df(stocks_df)
-    bench_weight_df, bench_yield_df = result_df(bench_df)
+    fund_weight_df, fund_yield_df= result_df(stocks_df)  #wp,rp
+    bench_weight_df, bench_yield_df = result_df(bench_df)  #wb,rb
+    
     fund_weight_df = to_all_key(bench_weight_df, fund_weight_df, 'weight')
     fund_yield_df = to_all_key(bench_yield_df, fund_yield_df, 'yield')
     result_division= get_results(fund_weight_df, fund_yield_df, bench_weight_df, bench_yield_df)
