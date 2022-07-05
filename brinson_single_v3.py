@@ -3,7 +3,7 @@
 # single period
 
 import seaborn as sns
-from WindPy import w #金融模块
+from WindPy import w #金融模块,需要账号
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -151,21 +151,21 @@ def draw_graph(result1, result2, result3, result4):
 def get_results(fund_weight_df, fund_yield_df, bench_weight_df, bench_yield_df):
     "Produce result and graph."
     
-    bench_weight_df = re_index(bench_weight_df)
-    bench_yield_df = re_index(bench_yield_df)
-    fund_weight_df = re_index(fund_weight_df)
-    fund_yield_df = re_index(fund_yield_df)
+    bench_weight_df = re_index(bench_weight_df) #wB
+    bench_yield_df = re_index(bench_yield_df)   #rB
+    fund_weight_df = re_index(fund_weight_df)   #WP
+    fund_yield_df = re_index(fund_yield_df)     #rP
         
         
-    allocation_result =  (fund_weight_df['weight'] - bench_weight_df['weight']) * bench_yield_df['yield']
-    allocation_df =  allocation_result.to_frame(name='result')
+    allocation_result =  (fund_weight_df['weight'] - bench_weight_df['weight']) * bench_yield_df['yield']  #配置收益
+    allocation_df =  allocation_result.to_frame(name='result')                                             
     industry_allocation = allocation_df.sum()[0]
     
-    selection_result = (fund_yield_df['yield'] - bench_yield_df['yield']) * bench_weight_df['weight']
+    selection_result = (fund_yield_df['yield'] - bench_yield_df['yield']) * bench_weight_df['weight']      #选择收益
     selection_df = selection_result.to_frame(name='result')
     stock_selection = selection_df.sum()[0]
 
-    interaction_result = (fund_weight_df['weight'] - bench_weight_df['weight']) * (fund_yield_df['yield'] - bench_yield_df['yield'])
+    interaction_result = (fund_weight_df['weight'] - bench_weight_df['weight']) * (fund_yield_df['yield'] - bench_yield_df['yield'])#交互收益
     interaction_df = interaction_result.to_frame(name='result')
     interaction = interaction_df.sum()[0]
 
