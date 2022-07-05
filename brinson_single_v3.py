@@ -3,7 +3,7 @@
 # single period
 
 import seaborn as sns
-from WindPy import w
+from WindPy import w #金融模块
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
